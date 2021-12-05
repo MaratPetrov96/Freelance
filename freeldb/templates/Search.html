@@ -1,0 +1,9 @@
+{% extends 'Freelbase.html' %}
+{% block content %}
+{% for i in res %}
+<div class='project'>
+<img src={{i.prev.url}} style='width:450px;'>
+<p><a href='/projects/{{i.id}}'>{{i.name}}</a></p>
+</div>
+{% endfor %}
+{% endblock %}

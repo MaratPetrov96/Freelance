@@ -1,0 +1,9 @@
+{% extends 'Freelbase.html' %}
+{% block content %}
+<h2>Исполнители по категориям</h2>
+<div class='main_page'>
+{% for i in data %}
+<p><a href='sellers/{{i.id}}'>{{i.title}} ({{i.sellers.count}})</a></p>
+{% endfor %}
+</div>
+{% endblock %}

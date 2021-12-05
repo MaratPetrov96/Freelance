@@ -1,0 +1,25 @@
+{% extends 'UserBase.html' %}
+{% block user_page %}
+<table style='width:100%;max-width:100%;'>
+<tr>
+<td class='td_'>Тема</td><td style="background-color:#AED1CD">{{message.theme}}</td>
+</tr>
+<tr>
+<td class='td_'>Дата</td><td>{{message.date.date}}</td>
+</tr>
+<tr>
+<td class='td_'>Отправитель</td><td>{{message.sender.username}}</td>
+</tr>
+<tr>
+<td class='td_'>Получатель</td><td>{{message.receiver.username}}</td>
+</tr>
+</table>
+{{message.content|linebreaks}}
+{% if message.files %}
+<form action='/loadmessage/{{message.files.name}}' method='POST' enctype='multipart/form-data'>
+{% csrf_token %}
+<input type='submit' value='Скачать'>
+{{filename}}
+</form>
+{% endif %}
+{% endblock %}

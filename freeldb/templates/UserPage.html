@@ -1,0 +1,30 @@
+{% extends 'UserBase.html' %}
+{% block user_page %}
+<table>
+{% if user.is_authenticated %}
+<tr>
+<td>
+{% if user.pk == user_pg.pk %}
+<a href='/add_work'><div class='x83'>Добавить работу</div></a>
+{% else %}
+<a href='/message/{{user_pg.pk}}'><div class='x83'>Написать сообщение</div></a>
+{% endif %}
+</td>
+</tr>
+{% endif %}
+</table>
+<div class='portfolio'>
+{% regroup user_pg.portfolio.all by category.title as data %}
+{% for category in data %}
+<h5>{{category.grouper}}</h5>
+<div class='category'>
+{% for project in category.list %}
+<div class='project'>
+<img src={{project.prev.url}} style='width:450px;'>
+<p><a href='/projects/{{project.id}}'>{{project.name}}</a></p>
+</div>
+{% endfor %}
+{% endfor %}
+</div>
+</div>
+{% endblock %}

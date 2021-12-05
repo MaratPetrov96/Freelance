@@ -1,0 +1,36 @@
+{% extends 'UserBase.html' %}
+{% block user_page %}
+<h2>Отзывы</h2>
+{% for i in user_pg.user.views_about.all %}
+<table>
+<tr><td>
+<a href ='/users/{{i.viewer.pk}}'>{{i.viewer}}</a>
+{{i.date}}
+</td>
+</tr>
+<tr>
+<td>
+<b>Отзыв: </b>
+{% if i.char == '-1' %}
+<b>Отрицательный</b>
+{% elif i.char == '0' %}
+<b>Нейтральный</b>
+{% else %}
+<b>Положительный</b>
+{% endif %}
+</td>
+</tr>
+<tr>
+{{i.content}}
+</table>
+{% endfor %}
+{% if user.is_authenticated %}
+{% if user.pk != user_pg.pk %}
+<form action='/view/{{user_pg.pk}}' method='POST'>
+{% csrf_token %}
+{{form.as_p}}
+<input type='submit' value='Оставить'>
+</form>
+{% endif %}
+{% endif %}
+{% endblock %}

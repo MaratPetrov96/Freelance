@@ -1,0 +1,20 @@
+{% extends 'UserBase.html' %}
+{% block user_page %}
+<table class='port_data'>
+{% for i in data %}
+<tr>
+<td>
+<a href='/projects/{{i.pk}}'>{{i.name}}</a>
+</td>
+<td>
+<a href='projects/{{i.pk}}/edit'>Изменить</a>
+</td>
+<td>
+<form action='/projects/{{i.id}}/delete' method='POST'>
+<input type="submit" value="Удалить" class="btn-link">
+</form>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

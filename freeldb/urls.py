@@ -1,0 +1,45 @@
+from . import views
+from django.urls import path,include
+from django.contrib.auth.decorators import login_required
+"path('orders/<int:pg>',views.page,name='page'),"
+'''urlpatterns=[
+    path('login',views.LogIn,name='login'),
+    path('logout',views.LogOut,name='logout'),
+    path('sign',views.signup),
+    ]'''
+""
+urlpatterns=[
+    path('login',views.LogIn,name='login'),
+    path('logout',views.LogOut,name='logout'),
+    path('sign',views.signup),
+    path('users/<int:pk>',views.UserView.as_view(),name='UPage'),
+    path('users/<int:pk>/views',views.views),
+    path('users/<int:pk>/views/p=<int:pg>',views.views),
+    path('sellers/<int:cat>/<int:pg>',views.sellers),
+    path('sellers/<int:cat>',views.sellers),
+    path('sellers/p=<int:pg>',views.sellers),
+    path('sellers',views.sellers),
+    path('work/<int:pk>',views.OrderView.as_view(),name='Order'),
+    path('work/<int:pk>/cancel',views.cancel),
+    path('orders/<int:cat>/<int:pg>',views.Orders,name='orders'),
+    path('orders/<int:cat>',views.Orders,name='orders'),
+    path('order=<int:order>',views.offer,name='Offer'),
+    path('orders_cat',views.group),
+    path('add',views.new_order),
+    path('add_work',views.portfolio),
+    path('',views.main,name='main'),
+    path('projects/<int:pk>',views.PortfolioView.as_view(),name='Portfolio'),
+    path('projects/<int:pk>/edit',login_required(views.PortfolioEdit.as_view())),
+    path('edit=works',views.portfolio_table),
+    path('editor',views.editor),
+    path('messenger',views.chat,name='messenger'),
+    path('messenger/p=<int:pg>',views.chat),
+    path('sent',views.sent,name='sent'),
+    path('sent/p=<int:pg>',views.sent),
+    path('message/<int:user>',views.message),
+    path('view/<int:pk>',views.Viewing),
+    path('messages/id=<int:pk>',views.message_view),
+    path('load/<str:filename>',views.download),
+    path('loadmessage/<str:filename>',views.download_from_mess),
+    path('search',views.search),
+    ]

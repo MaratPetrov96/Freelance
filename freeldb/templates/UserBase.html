@@ -1,0 +1,22 @@
+{% extends 'Freelbase.html' %}
+{% block content %}
+{% if user_pg.picture %}
+<img src='{{user_pg.picture.url}}' width='70' height='70'>
+{% else %}
+<img src='/static/1024px-Python-logo-notext.jpg' width='70' height='70'>
+{% endif %}
+<span style='font-size:19px;'>{{user_pg.user.username}}</span>
+<table class='user_data'>
+<tr>
+<td><a href='/users/{{user_pg.pk}}'>О фрилансере</a></td>
+<td><a href='/users/{{user_pg.pk}}/views'>Отзывы</a></td>
+{% if count %}
+<td>{{count}}</td>
+{% else %}
+<td>Пока нет отзывов</td>
+{% endif %}
+</tr>
+</table>
+{% block user_page %}
+{% endblock %}
+{% endblock %}

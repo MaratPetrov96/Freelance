@@ -1,0 +1,31 @@
+{% extends 'Freelbase.html' %}
+{% block content %}
+{% if data %}
+<form method='POST'>
+<table>
+{% for i in data %}
+<tr>
+<td><input type='checkbox' value={{i.pk}} name='to_delete'></td>
+<td>
+<a href='/messages/id={{i.pk}}'>{{i.theme}}</a> {{i.sender.username}}
+</td>
+<td>{{i.date}}</td>
+</tr>
+{% endfor %}
+</table>
+</form>
+<div class='pages'>
+{% if data.has_previous %}
+<a href='/messanger/p={{ data.previous_page_number }}'>{{ data.previous_page_number }}</a>
+{% endif %}
+<span>{{data.number}}</span>
+{% if data.has_next %}
+<a href='/messenger/p={{ data.next_page_number }}'>{{ data.next_page_number }}</a>
+{% endif %}
+</div>
+{% else %}
+<div align='center'>
+<p>Вы ещё ни с кем не переписывались</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'UserBase.html' %}
+{% block user_page %}
+<form action='/add_work' method='POST' enctype='multipart/form-data'>
+{% csrf_token %}
+{{form.as_p}}
+<input type='submit' value='Загрузить'>
+</form>
+{% if error %}
+<p>{{error}}</p>
+{% endif %}
+{% endblock %}

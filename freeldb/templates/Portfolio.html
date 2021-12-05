@@ -1,0 +1,8 @@
+{% extends 'Freelbase.html' %}
+{% block content %}
+<h1>{{project.name}}</h1>
+<img src='{{project.prev.url}}'>
+{{project.content|linebreaks}}
+<p>Рубрика: {{project.category.title}}</p>
+<p>Дата загрузки: {{project.date}}</p>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'FreelBase.html' %}
+{% block content %}
+<div class='title'>
+<table>
+<tr>
+<td>
+{% if order.user.picture %}
+<img src='{{of.user.picture.url}}' width='70' height='70'>
+{% else %}
+<img src='/static/1024px-Python-logo-notext.jpg' width='70' height='70'>
+{% endif %}
+</td>
+<td>
+{{order.user.user}}
+</td>
+</tr>
+</table>
+<span>{{order.name}}</span>
+<span>Бюджет: {{order.price}} {{one.unit}}</span>
+</div>
+<div class='descr'>
+{{order.content|linebreaks}}
+</div>
+{% if order.files %}
+<form action='/load/{{filename}}' method='POST' enctype='multipart/form-data'>
+{% csrf_token %}
+<input type='submit' value='Скачать файл'><span>{{filename}}</span>
+</form>
+{% if filetype %}
+<img src='{{order.files.url}}'>
+{% endif %}
+{% endif %}
+{% if user.is_authenticated %}
+{% if order.user.pk == user.pk %}
+<form action='/work/{{order.pk}}/cancel' method='post'>
+{% csrf_token %}
+<input type='submit' value='Отменить заказ'>
+</form>
+{% endif %}
+{% endif %}
+{% if user.is_authenticated %}
+{% if order.user.pk != user.pk %}
+<form method='POST' action='/order={{order.pk}}' enctype='multipart/form-data'>
+{% csrf_token %}
+<table>
+{{form.as_table}}
+<tr>
+<td><input type='submit' value='Откликнуться'></td>
+</tr>
+</table>
+</form>
+{% endif %}
+{% endif %}
+{% for of in order.offers.all %}
+<table>
+<tr>
+<td>
+{% if of.user.picture %}
+<img src='{{of.user.picture.url}}' width='90' height='90'>
+{% else %}
+<img src='/static/1024px-Python-logo-notext.jpg' width='90' height='90'>
+{% endif %}
+</td>
+<td><p>{{ of.user.user }}</p>{{ of.content|linebreaks}}</td>
+<td><p>{{of.time}} д.</p><p>{{of.price}} {{of.unit}}</p></td>
+</tr>
+</table>
+{% endfor %}
+{% endblock %}

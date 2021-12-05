@@ -1,0 +1,48 @@
+{% extends 'FreelBase.html' %}
+{% block content %}
+<form action='/orders_cat' method='POST'>
+<select name='select' onchange="javascript:SellerSelect(this)">
+{% if not cat %}
+<option value=0 selected="selected">Все</option>
+{% else %}
+<option value=0>Все</option>
+{% endif %}
+{% for c in catg %}
+{% if c.id == cat_id %}
+<option value={{c.id}} selected="selected">{{c.title}}</option>
+{% else %}
+<option value={{c.id}}>{{c.title}}</option>
+{% endif %}
+{% endfor %}
+</select>
+</form>
+<div class='sellers' align='left'>
+{% for u in data %}
+<div class='seller'>
+{% if u.picture %}
+<img src='{{u.picture.url}}' width='100' height='100'>
+{% else %}
+<img src='/static/1024px-Python-logo-notext.jpg' width='70' height='70'>
+{% endif %}
+<a href='/users/{{u.pk}}'>{{u.user.username}}</a>
+</div>
+{% endfor %}
+</div>
+<div class='pages'>
+{% if data.has_previous %}
+{% if cat %}
+<a href='/{{cat.id}}/{{ data.previous_page_number }}'>{{ data.previous_page_number }}</a>
+{% else %}
+<a href='/sellers/p={{ data.previous_page_number }}'>{{ data.previous_page_number }}</a>
+{% endif %}
+{% endif %}
+<span>{{data.number}}</span>
+{% if data.has_next %}
+{% if cat %}
+<a href='/{{cat.id}}/{{ data.next_page_number }}'>{{ data.next_page_number }}</a>
+{% else %}
+<a href='/sellers/p={{ data.next_page_number }}'>{{ data.next_page_number }}</a>
+{% endif %}
+{% endif %}
+</div>
+{% endblock %}

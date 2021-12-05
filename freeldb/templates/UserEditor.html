@@ -1,0 +1,10 @@
+{% extends 'UserBase.html' %}
+{% block user_page %}
+<h2>Редактирование профиля</h2>
+<form action='/editor' method='POST' enctype='multipart/form-data' class='editor'>
+{% csrf_token %}
+<textarea name="content" cols="40" rows="10" id="id_content">{{user_pg.content}}</textarea>
+<input type="file" name="picture" accept="image/*" id="id_picture">
+<input type='submit' value='Сохранить изменения'>
+</form>
+{% endblock %}

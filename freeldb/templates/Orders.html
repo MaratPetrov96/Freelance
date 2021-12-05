@@ -1,0 +1,47 @@
+{% extends 'Freelbase.html' %}
+{% block content %}
+<form action='/orders_cat' method='POST'>
+<select name='select' onchange="javascript:handleSelect(this)">
+{% if not cat %}
+<option value=0 selected="selected">Все</option>
+{% else %}
+<option value=0>Все</option>
+{% endif %}
+{% for c in catg %}
+{% if c.id == cat_id %}
+<option value={{c.id}} selected="selected">{{c.title}}</option>
+{% else %}
+<option value={{c.id}}>{{c.title}}</option>
+{% endif %}
+{% endfor %}
+</select>
+</form>
+<div class='orders' align='left'>
+{% for one in orders %}
+{% if one.status %}
+<div class='one'>
+<div class='title'>
+<a href='/work/{{one.id}}'>{{one.name}}</a>
+<span>{{one.price}} {{one.unit}}</span>
+</div>
+<div class='descr'>
+<p>{{one.content}}</p>
+</div>
+<p>
+<span>Проект добавлен {{one.date}} - </span>
+<span>Ответов: {{one.offers.count}}</span>
+</p>
+</div>
+{% endif %}
+{% endfor %}
+</div>
+<div class='pages'>
+{% if orders.has_previous %}
+<a href='/orders/{{cat_id}}/{{ orders.previous_page_number }}'>{{ orders.previous_page_number }}</a>
+{% endif %}
+<span>{{orders.number}}</span>
+{% if orders.has_next %}
+<a href='/orders/{{cat_id}}/{{ orders.next_page_number }}'>{{ orders.next_page_number }}</a>
+{% endif %}
+</div>
+{% endblock %}

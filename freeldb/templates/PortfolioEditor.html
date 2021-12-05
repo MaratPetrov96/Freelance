@@ -1,0 +1,12 @@
+{% extends 'UserBase.html' %}
+{% block user_page %}
+<h2>Редактор портфолио</h2>
+<form method='POST' enctype='multipart/form-data'>
+{% csrf_token %}
+{{form.as_p}}
+<input type='submit' value='Сохранить'>
+</form>
+{% autoescape off %}
+{{test}}
+{% endautoescape %}
+{% endblock %}
