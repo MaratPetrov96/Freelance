@@ -10,8 +10,8 @@
 <tr>
 <td><a href='/users/{{user_pg.pk}}'>О фрилансере</a></td>
 <td><a href='/users/{{user_pg.pk}}/views'>Отзывы</a></td>
-{% if count %}
-<td>{{count}}</td>
+{% if user_pg.user.views_about.all %}
+<td>{{user_pg.user.views_about.count}}</td>
 {% else %}
 <td>Пока нет отзывов</td>
 {% endif %}
