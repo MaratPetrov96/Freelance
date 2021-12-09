@@ -109,7 +109,6 @@ class UserView(DetailView): #просмотр страницы пользова�
         context['title']=self.object.user.username
         context['user']=self.request.user
         context['unread'] = unread(self.request)
-        context['count'] = self.object.user.views_about.count()
         return context
 
 class PortfolioView(DetailView): #просмотр портфолио/portfolio view
